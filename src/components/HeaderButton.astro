@@ -1,0 +1,32 @@
+<a class="header-button text-white cursor-pointer hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 transition-all duration-200 ease-in-out">
+  <div class="icon-container flex items-center gap-x-2">
+      <slot />
+  </div>
+</a>
+
+<style>
+  .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+  }
+
+  .header-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Sombra para efecto de eclipse */
+  }
+
+  .icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .header-button:hover .icon-container {
+      transform: scale(1.1);
+      background-color: #DD6B20; /* Equivalente a bg-orange-600 en Tailwind CSS */
+      border-radius: 50%; /* Redondear contenedor */
+  }
+</style>

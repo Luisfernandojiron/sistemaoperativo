@@ -1,51 +1,99 @@
 ---
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
 ---
 
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <!-- Link to Tailwind CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body class="bg-cover bg-center" style="background-image: url('https://w.wallhaven.cc/full/01/wallhaven-017omw.jpg');">
+        <div id="app" class="relative h-screen">
+            <header class="[grid-area:taskbar] min-h-[30px] bg-red-900 fixed top-0 left-0 w-full z-30">TASKBAR</header>
+            <main class="[grid-area:main] bg-red-00 relative flex items-center justify-center">
+                <div id="desktop-icons" class="grid grid-cols-4 gap-8 mt-20">
+                    <!-- Icon 1 -->
+                    <a href="https://www.spotify.com" target="_blank" rel="noopener noreferrer" class="text-center">
+                        <div class="icon-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" alt="Spotify" class="w-16 h-16 mx-auto icon">
+                        </div>
+                        <span class="text-white block mt-2">Spotify</span>
+                    </a>
+                    <!-- Icon 2 -->
+                    <a href="https://docs.google.com/document/" target="_blank" rel="noopener noreferrer" class="text-center">
+                        <div class="icon-container">
+                            <img src="https://static.vecteezy.com/system/resources/previews/027/179/376/non_2x/microsoft-word-icon-logo-symbol-free-png.png" alt="Word" class="w-16 h-16 mx-auto icon">
+                        </div>
+                        <span class="text-white block mt-2">Word</span>
+                    </a>
+                    <!-- Icon 3 -->
+                    <a href="https://docs.google.com/spreadsheets/" target="_blank" rel="noopener noreferrer" class="text-center">
+                        <div class="icon-container">
+                            <img src="https://static.vecteezy.com/system/resources/previews/027/179/360/original/microsoft-excel-icon-logo-symbol-free-png.png" alt="Excel" class="w-16 h-16 mx-auto icon">
+                        </div>
+                        <span class="text-white block mt-2">Excel</span>
+                    </a>
+                    <!-- Icon 4 -->
+                    <a href="https://docs.google.com/presentation/" target="_blank" rel="noopener noreferrer" class="text-center">
+                        <div class="icon-container">
+                            <img src="https://static.vecteezy.com/system/resources/previews/027/179/382/non_2x/microsoft-power-point-icon-logo-symbol-free-png.png" alt="PowerPoint" class="w-16 h-16 mx-auto icon">
+                        </div>
+                        <span class="text-white block mt-2">PowerPoint</span>
+                    </a>
+                    <!-- Add more icons as needed -->
+                </div>
+            </main>
+        </div>
+        <slot />
+    </body>
 </html>
-<style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+<style>
+    #app {
+        display: grid;
+        grid-template-areas:
+            "main main main"
+            "taskbar taskbar taskbar";
+        grid-template-rows: 1fr auto;
+    }
+
+    body {
+        font-family: system-ui, sans-serif;
+        background-color: #000; /* Fallback background color */
+    }
+
+    .icon-container {
+        display: inline-block;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .icon-container:hover {
+        transform: scale(1.1);
+        background-color: #DD6B20; /* Equivalente a bg-orange-600 en Tailwind CSS */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Sombra para efecto de eclipse */
+    }
+
+    .icon {
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    .icon-container:hover .icon {
+        transform: scale(1.1);
+    }
 </style>
+
