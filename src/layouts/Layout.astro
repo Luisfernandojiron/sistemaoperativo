@@ -6,6 +6,7 @@ interface Props {
 const { title } = Astro.props;
 ---
 
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -18,10 +19,10 @@ const { title } = Astro.props;
         <!-- Link to Tailwind CSS -->
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     </head>
-    <body class="bg-cover bg-center" style="background-image: url('https://w.wallhaven.cc/full/01/wallhaven-017omw.jpg'); background-size: cover;">
+    <body class="bg-cover bg-center" style="background-image: url('https://w.wallhaven.cc/full/01/wallhaven-017omw.jpg');">
         <div id="app" class="relative h-screen">
             <header class="[grid-area:taskbar] min-h-[30px] bg-red-900 fixed top-0 left-0 w-full z-30">TASKBAR</header>
-            <main class="[grid-area:main] bg-transparent relative flex items-center justify-center">
+            <main class="[grid-area:main] bg-red-00 relative flex items-center justify-center">
                 <div id="desktop-icons" class="grid grid-cols-4 gap-8 mt-20">
                     <!-- Icon 1 -->
                     <a href="https://www.spotify.com" target="_blank" rel="noopener noreferrer" class="text-center">
@@ -69,6 +70,7 @@ const { title } = Astro.props;
 
     body {
         font-family: system-ui, sans-serif;
+        background-color: #000; /* Fallback background color */
     }
 
     .icon-container {
