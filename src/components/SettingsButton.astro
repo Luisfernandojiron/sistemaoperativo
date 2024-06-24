@@ -1,0 +1,211 @@
+<div id="settings-button" class="header-button text-white text-lg px-6 py-5 flex items-center justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+  </svg>
+</div>
+
+<div id="settings-menu" class="settings-menu hidden">
+  <div class="settings-header text-white">Configuración</div>
+  <div class="settings-list">
+    <div class="settings-section">
+      <div class="section-title text-white">Conexiones</div>
+      <ul>
+        <li>
+          <div class="setting text-white">
+            <span>Conexión Ethernet</span>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="setting text-white">
+            <span>Wi-Fi</span>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </li>
+        <li>
+          <div class="setting text-white">
+            <span>Bluetooth</span>
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="settings-section text-white">
+      <div class="section-title text-white">Sistema</div>
+      <ul class="text-white">
+        <li><a href="# ">Fecha y hora</a></li>
+        <li><a href="#">Idioma y entrada</a></li>
+        <li><a href="#">Seguridad</a></li>
+        <li><a href="#">Actualizaciones de software</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const settingsButton = document.getElementById('settings-button');
+    const settingsMenu = document.getElementById('settings-menu');
+
+    if (settingsButton && settingsMenu) {
+      settingsButton.addEventListener('click', function() {
+        settingsMenu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>
+
+<style>
+  .header-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .header-button:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  }
+
+  .bi-gear-fill {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease; /* Animación para el icono */
+    margin-top: -7px;
+  }
+
+  .header-button:hover .bi-gear-fill {
+    transform: rotate(360deg); /* Rotación completa al pasar el mouse */
+  }
+
+  .settings-menu {
+    position: absolute;
+    top: 50px; /* Ajusta la posición según sea necesario */
+    left: 40%;
+    right: 0%;
+    background-color: rgba(177, 40, 40, 0.551); /* Rojo brillante con poca opacidad */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Sombra más suave */
+    padding: 10px;
+    width: 300px; /* Ancho del menú */
+    font-family: Arial, sans-serif;
+    z-index: 100; /* Ajusta el índice z para asegurar que esté por encima de otros elementos */
+    opacity: 0; /* Inicialmente oculto */
+    pointer-events: none; /* Desactiva eventos en el menú oculto */
+    transition: opacity 0.3s ease; /* Transición suave para la opacidad */
+  }
+
+  /* Mostrar el menú */
+  .settings-menu:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto; /* Activa eventos en el menú visible */
+  }
+
+  .settings-header {
+    font-size: 24px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #873c3c;
+    margin-bottom: 10px;
+  }
+
+  .settings-list {
+    padding: 10px;
+  }
+
+  .settings-section {
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .settings-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .settings-section ul li {
+    margin-bottom: 5px;
+  }
+
+  .settings-section ul li a {
+    display: block;
+    color: #ffffff; /* Cambia el color del texto a blanco */
+    text-decoration: none;
+    padding: 8px 10px;
+  }
+
+  .settings-section ul li a:hover {
+    background-color: #ee5720;
+  }
+
+  /* Estilo para los switches */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 26px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(255, 249, 249);
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #f8601f;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(16px);
+  }
+
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>

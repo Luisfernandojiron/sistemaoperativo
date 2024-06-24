@@ -1,0 +1,90 @@
+<!-- CalendarButton.astro -->
+<div id="calendar-button" class="header-button text-white text-lg px-8 py-4 relative">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+      <path d="M6.445 11.688V6.354h-.633A13 13 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23"/>
+      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+    </svg>
+    <div id="calendar-text" class="absolute hidden bg-black text-white text-sm px-2 py-2 rounded-md shadow-md">
+      <span id="current-date"></span><br>
+      <span id="current-time"></span>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const calendarButton = document.getElementById('calendar-button');
+      const currentDateElement = document.getElementById('current-date');
+      const currentTimeElement = document.getElementById('current-time');
+      const calendarText = document.getElementById('calendar-text'); // Corregido: Se añadió la referencia a calendarText
+  
+      if (calendarButton && currentDateElement && currentTimeElement && calendarText) {
+        const updateDateTime = () => {
+          const currentDate = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+          const currentTime = new Date().toLocaleTimeString('es-ES', { hour: 'numeric', minute: 'numeric', second: 'numeric' });
+  
+          currentDateElement.textContent = currentDate;
+          currentTimeElement.textContent = currentTime;
+          calendarButton.classList.add('active'); // Añade una clase para aplicar estilos al pasar el mouse
+          setTimeout(() => calendarButton.classList.remove('active'), 100); // Elimina la clase después de 100ms para la animación
+        };
+  
+        const showDateTime = () => {
+          updateDateTime();
+          calendarText.classList.remove('hidden'); // Muestra el texto al pasar el mouse
+        };
+  
+        const hideDateTime = () => {
+          calendarText.classList.add('hidden'); // Oculta el texto al quitar el mouse
+        };
+  
+        calendarButton.addEventListener('mouseenter', showDateTime);
+        calendarButton.addEventListener('mouseleave', hideDateTime);
+  
+        // Actualizar fecha y hora cada segundo para que esté siempre actualizado
+        setInterval(updateDateTime, 1000);
+      }
+    });
+  </script>
+  
+  <style>
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  
+    .header-button:hover {
+      transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    }
+  
+    .bi-calendar-date {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease; /* Animación para el icono */
+    }
+  
+    .header-button.active {
+      background-color: #8a252500; /* Fondo del botón al estar activo */
+      border-radius: 8px; /* Borde redondeado */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    }
+  
+    /* Estilos para el texto de la fecha y hora */
+    #calendar-text {
+      top: calc(100% + 8px); /* Coloca el texto debajo del botón */
+      left: calc(50% - 60px); /* Mueve el texto hacia la izquierda */
+      transform: translateX(-50%); /* Ajusta la posición del texto */
+      font-size: 14px; /* Tamaño de fuente más pequeño */
+      white-space: nowrap; /* Evita que el texto se rompa */
+      transition: opacity 0.3s ease; /* Animación de opacidad */
+      opacity: 0; /* Inicialmente oculto */
+    }
+  
+    .header-button:hover #calendar-text {
+      opacity: 1; /* Muestra el texto al pasar el mouse */
+    }
+  </style>
+  

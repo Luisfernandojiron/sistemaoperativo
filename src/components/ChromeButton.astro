@@ -1,0 +1,41 @@
+<div id="chrome-button" class="header-button text-white text-lg px-6 py-5 flex items-center justify-center">
+    <img src="https://svgl.app/library/chrome.svg" alt="Chrome Icon" class="chrome-icon" />
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const chromeButton = document.getElementById('chrome-button');
+  
+      if (chromeButton) {
+        chromeButton.addEventListener('click', function() {
+          window.open('https://www.google.com/chrome/', '_blank'); // Abre una nueva ventana de Chrome
+        });
+      }
+    });
+  </script>
+  
+  <style>
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+  
+    .header-button:hover {
+      transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    }
+  
+    .chrome-icon {
+      transition: transform 0.3s ease; /* Animación para el icono */
+      height: 30px;
+      width: 30px;
+      margin-top: -7px; /* Eleva el icono 5 píxeles hacia arriba */
+    }
+  
+    .header-button:hover .chrome-icon {
+      transform: rotate(360deg); /* Rotación completa al pasar el mouse */
+    }
+  </style>
+  

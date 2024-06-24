@@ -1,0 +1,56 @@
+<div id="google-calendar-button" class="header-button text-white text-lg px-6 py-5 flex items-center justify-center">
+    <img src="https://static-00.iconduck.com/assets.00/calendar-icon-1755x2048-3v7s6nt5.png" alt="Google Calendar Icon" class="google-calendar-icon" />
+  </div>
+  
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const googleCalendarButton = document.getElementById('google-calendar-button');
+
+        if (googleCalendarButton) {
+            googleCalendarButton.addEventListener('mouseover', function() {
+            const icon = googleCalendarButton.querySelector('.google-calendar-icon') as HTMLElement | null;
+            if (icon) {
+                icon.style.transform = 'rotate(360deg)';
+            }
+            });
+
+            googleCalendarButton.addEventListener('mouseout', function() {
+            const icon = googleCalendarButton.querySelector('.google-calendar-icon') as HTMLElement | null;
+            if (icon) {
+                icon.style.transform = 'rotate(0deg)';
+            }
+            });
+
+            googleCalendarButton.addEventListener('click', function() {
+            window.open('https://calendar.google.com/', '_blank');
+            });
+        }
+        });
+
+  </script>
+  
+  <style>
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+  
+    .header-button:hover {
+      transform: scale(1.1);
+    }
+  
+    .google-calendar-icon {
+      height: 30px;
+      width: 30px;
+      margin-top: -7px;
+      transition: transform 0.3s ease;
+    }
+  
+    .header-button:hover .google-calendar-icon {
+      transform: rotate(360deg);
+    }
+  </style>
+  

@@ -1,0 +1,73 @@
+<!-- BatteryButton.astro -->
+<div id="battery-button" class="header-button text-white text-lg px-8 py-4 relative">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-battery-full" viewBox="0 0 16 16">
+      <path d="M2 6h10v4H2z"/>
+      <path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm10 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm4 3a1.5 1.5 0 0 1-1.5 1.5v-3A1.5 1.5 0 0 1 16 8"/>
+    </svg>
+    <div id="battery-text" class="absolute hidden bg-black text-white text-sm px-2 py-1 rounded-md shadow-md">
+      100% de carga
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const batteryButton = document.getElementById('battery-button');
+      const batteryText = document.getElementById('battery-text');
+  
+      if (batteryButton && batteryText) {
+        const showBatteryStatus = () => {
+          batteryText.classList.remove('hidden'); // Muestra el texto al pasar el mouse
+        };
+  
+        const hideBatteryStatus = () => {
+          batteryText.classList.add('hidden'); // Oculta el texto al quitar el mouse
+        };
+  
+        batteryButton.addEventListener('mouseenter', showBatteryStatus);
+        batteryButton.addEventListener('mouseleave', hideBatteryStatus);
+      }
+    });
+  </script>
+  
+  <style>
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  
+    .header-button:hover {
+      transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    }
+  
+    .bi-battery-full {
+      width: 24px;
+      height: 24px;
+      transition: transform 0.3s ease; /* Animación para el icono */
+    }
+  
+    .header-button.active {
+      background-color: #ffffff; /* Fondo del botón al estar activo */
+      border-radius: 8px; /* Borde redondeado */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    }
+  
+    /* Estilos para el texto del estado de la batería */
+    #battery-text {
+      top: calc(100% + 8px); /* Coloca el texto debajo del botón */
+      left: 50%; /* Centra el texto horizontalmente */
+      transform: translateX(-50%); /* Ajusta la posición del texto */
+      font-size: 12px; /* Tamaño de fuente más pequeño */
+      white-space: nowrap; /* Evita que el texto se rompa */
+      transition: opacity 0.3s ease; /* Animación de opacidad */
+      opacity: 0; /* Inicialmente oculto */
+    }
+  
+    .header-button:hover #battery-text {
+      opacity: 1; /* Muestra el texto al pasar el mouse */
+    }
+  </style>
+  

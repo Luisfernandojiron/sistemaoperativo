@@ -1,32 +1,145 @@
-<a class="header-button text-white cursor-pointer hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-full px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 transition-all duration-200 ease-in-out">
-  <div class="icon-container flex items-center gap-x-2">
-      <slot />
+<!-- StartMenu.astro -->
+
+<div class="start-menu-container relative">
+  <button id="start-button" class="text-white text-lg px-6 py-5 flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-microsoft" viewBox="0 0 16 16">
+      <path d="M7.462 0H0v7.19h7.462zM16 0H8.538v7.19H16zM7.462 8.211H0V16h7.462zm8.538 0H8.538V16H16z"/>
+    </svg>
+  </button>
+
+  <div id="menu" class="hidden absolute bg-red-800 text-white rounded-lg shadow-lg mt-2 p-4">
+    <div class="grid grid-cols-2 gap-4">
+      <a href="https://www.spotify.com" target="_blank" rel="noopener noreferrer" class="text-center">
+        <div class="icon-container">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png" alt="Spotify" class="w-16 h-16 mx-auto icon">
+        </div>
+        <span class="text-white block mt-2">Spotify</span>
+      </a>
+      <a href="https://docs.google.com/document/" target="_blank" rel="noopener noreferrer" class="text-center">
+        <div class="icon-container">
+          <img src="https://static.vecteezy.com/system/resources/previews/027/179/376/non_2x/microsoft-word-icon-logo-symbol-free-png.png" alt="Word" class="w-16 h-16 mx-auto icon">
+        </div>
+        <span class="text-white block mt-2">Word</span>
+      </a>
+      <a href="https://docs.google.com/spreadsheets/" target="_blank" rel="noopener noreferrer" class="text-center">
+        <div class="icon-container">
+          <img src="https://static.vecteezy.com/system/resources/previews/027/179/360/original/microsoft-excel-icon-logo-symbol-free-png.png" alt="Excel" class="w-16 h-16 mx-auto icon">
+        </div>
+        <span class="text-white block mt-2">Excel</span>
+      </a>
+      <a href="https://docs.google.com/presentation/" target="_blank" rel="noopener noreferrer" class="text-center">
+        <div class="icon-container">
+          <img src="https://static.vecteezy.com/system/resources/previews/027/179/382/non_2x/microsoft-power-point-icon-logo-symbol-free-png.png" alt="PowerPoint" class="w-16 h-16 mx-auto icon">
+        </div>
+        <span class="text-white block mt-2">PowerPoint</span>
+      </a>
+    </div>
   </div>
-</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const startButton = document.getElementById('start-button') as HTMLElement | null;
+      const menu = document.getElementById('menu');
+
+      if (startButton && menu) {
+        startButton.addEventListener('click', function(event) {
+          event.stopPropagation();
+          menu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', function(event) {
+          const targetElement = event.target as Node | null; // Casting explícito a Node
+
+          if (!targetElement || !(targetElement instanceof Node)) {
+            // Verificar si targetElement es nulo o no es un nodo
+            return;
+          }
+
+          if (!startButton?.contains(targetElement) && !menu.contains(targetElement)) {
+            menu.classList.add('hidden');
+          }
+        });
+      }
+});
+</script>
+
 
 <style>
-  .header-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
+  .start-menu-container {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    margin-top: -7px; /* Ajuste para elevar el botón */
   }
 
-  .header-button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Sombra para efecto de eclipse */
+  #menu {
+    position: absolute;
+    top: calc(100% + 10px); /* Posición debajo del botón */
+    left: 50%; /* Centra horizontalmente respecto al contenedor */
+    transform: translateX(-50%);
+    background-color: rgba(177, 40, 40, 0.551); /* Rojo brillante con poca opacidad */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Borde redondeado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra */
+    padding: 10px;
+    width: 300px; /* Ancho del menú */
+    font-family: Arial, sans-serif;
+    z-index: 100; /* Ajusta el índice z para asegurar que esté por encima de otros elementos */
+    transition: opacity 0.3s ease; /* Transición suave para la opacidad */
+    opacity: 0; /* Inicialmente oculto */
+    pointer-events: none; /* Desactiva eventos en el menú oculto */
+  }
+
+  #menu:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .icon-container img {
+    display: block;
+    margin-top: 0px;
+  }
+
+  #start-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  #start-button:hover {
+    transform: scale(2.2); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  }
+
+  .bi-microsoft {
+    width: 23px;
+    height: 23px;
+    transition: transform 0.3s ease;
   }
 
   .icon-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-  }
+        display: inline-block;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con opacidad */
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  .header-button:hover .icon-container {
-      transform: scale(1.1);
-      background-color: #DD6B20; /* Equivalente a bg-orange-600 en Tailwind CSS */
-      border-radius: 50%; /* Redondear contenedor */
-  }
+    .icon-container:hover {
+        transform: scale(1.1);
+        background-color: #DD6B20; /* Equivalente a bg-orange-600 en Tailwind CSS */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Sombra para efecto de eclipse */
+    }
+
+    .icon {
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+    }
+
+    .icon-container:hover .icon {
+        transform: scale(1.1);
+    }
+
 </style>

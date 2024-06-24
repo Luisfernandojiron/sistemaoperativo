@@ -1,0 +1,96 @@
+<!-- SearchComponent.astro -->
+
+<div id="search-container" class="header-button text-white cursor-pointer focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-full px-5 py-2 text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 transition-all duration-200 ease-in-out">
+  <div class="icon-container flex items-center gap-x-2">
+    <input type="text" id="search-input" class="hidden text-black px-4 py-2 rounded-md focus:outline-none absolute left-1 top-2 bg-white" placeholder="Buscar...">
+    <button id="search-button" class="relative z-10 text-white mr-4 flex items-center justify-center rounded-full bg-[#6e2a2a00] hover:bg-transparent focus:ring-2 focus:ring-transparent">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-search">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+        <path d="M21 21l-6 -6"/>
+      </svg>
+      <span class="ml-2">BUSCAR</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchButton = document.getElementById('search-button');
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+
+    if (searchButton && searchInput) {
+      // Función para mostrar el campo de búsqueda y ocultar el botón de búsqueda
+      const showSearchInput = () => {
+        searchButton.classList.add('hidden');
+        searchInput.classList.remove('hidden');
+        searchInput.classList.add('absolute', 'left-1', 'top-2', 'bg-white', 'px-4', 'py-2', 'rounded-md', 'animate-expand-search');
+        searchInput.focus();
+      };
+
+      // Función para restaurar el estado inicial del campo de búsqueda
+      const restoreInitialState = () => {
+        searchButton.classList.remove('hidden');
+        searchInput.classList.add('hidden');
+        searchInput.value = ''; // Limpiar el valor del campo de búsqueda
+        searchInput.classList.remove('animate-expand-search');
+      };
+
+      // Evento de clic en el botón de búsqueda para mostrar el campo de entrada
+      searchButton.addEventListener('click', showSearchInput);
+
+      // Evento de pérdida de foco en el campo de búsqueda para restaurar el estado inicial
+      searchInput.addEventListener('blur', restoreInitialState);
+
+      // Evento de clic en cualquier parte del documento para restaurar el estado inicial
+      document.addEventListener('click', function(event) {
+        const searchContainer = document.getElementById('search-container');
+        if (searchContainer && !searchContainer.contains(event.target as Node)) {
+          restoreInitialState();
+        }
+      });
+
+      // Evento de tecla para abrir una nueva pestaña de búsqueda cuando se presiona "Enter"
+      searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          const query = searchInput.value.trim();
+          if (query) {
+            const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.open(searchUrl, '_blank');
+            restoreInitialState();
+          }
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .header-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Estilo para la animación de expandir el campo de búsqueda */
+  @keyframes expand-search {
+    0% {
+      width: 40px; /* Ancho inicial */
+    }
+    100% {
+      width: 200px; /* Ancho expandido */
+    }
+  }
+
+  /* Aplicar la animación al campo de búsqueda */
+  .animate-expand-search {
+    animation: expand-search 0.3s ease;
+  }
+</style>

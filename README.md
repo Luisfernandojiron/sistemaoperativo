@@ -1,4 +1,5 @@
 # Astro Starter Kit: Basics
+# Avance2
 
 ```sh
 npm create astro@latest -- --template basics

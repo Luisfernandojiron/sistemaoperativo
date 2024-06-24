@@ -1,0 +1,41 @@
+<div id="microsoft-store-button" class="header-button text-white text-lg px-6 py-5 flex items-center justify-center">
+    <img src="https://cdn-icons-png.flaticon.com/512/888/888865.png" alt="Microsoft Store Icon" width="30" height="40" />
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const microsoftStoreButton = document.getElementById('microsoft-store-button');
+    
+      if (microsoftStoreButton) {
+        microsoftStoreButton.addEventListener('click', function() {
+          window.open('https://apps.microsoft.com/home?hl=es-hn&gl=HN', '_blank'); // Abre una nueva pestaña con la Microsoft Store
+        });
+      }
+    });
+  </script>
+  
+  <style>
+    .header-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+  
+    .header-button:hover {
+      transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+    }
+  
+    .header-button img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease; /* Animación para la imagen */
+      margin-top: -13px; /* Ajuste de posición */
+    }
+  
+    .header-button:hover img {
+      transform: rotate(360deg); /* Rotación completa al pasar el mouse */
+    }
+  </style>
+  
